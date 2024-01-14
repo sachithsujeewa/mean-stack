@@ -27,6 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
+const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const database_1 = require("./database");
 const employee_routes_1 = require("./employee.routes");
@@ -35,6 +36,10 @@ const port = process.env.PORT || 8080;
 dotenv.config();
 const { ATLAS_URI } = process.env;
 (0, database_1.connectToDatabase)(ATLAS_URI || "mongodb://localhost:27017").then(() => {
+    app.use((0, cors_1.default)({
+        origin: "https://mean-frontend-g5w2db6nj-sachithsujeewa.vercel.app",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+    }));
     app.use("/employees", employee_routes_1.employeeRouter);
     app.get('/', (_req, res) => {
         return res.send('Express Typescript on Vercel');
