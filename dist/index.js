@@ -36,10 +36,7 @@ const port = process.env.PORT || 8080;
 dotenv.config();
 const { ATLAS_URI } = process.env;
 (0, database_1.connectToDatabase)(ATLAS_URI || "mongodb://localhost:27017").then(() => {
-    app.use((0, cors_1.default)({
-        origin: "https://mean-frontend-g5w2db6nj-sachithsujeewa.vercel.app",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-    }));
+    app.use((0, cors_1.default)()); // Allow requests from any site and for any methods
     app.use("/employees", employee_routes_1.employeeRouter);
     app.get('/', (_req, res) => {
         return res.send('Express Typescript on Vercel');

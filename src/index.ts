@@ -14,10 +14,7 @@ const { ATLAS_URI } = process.env;
 
 connectToDatabase(ATLAS_URI || "mongodb://localhost:27017").then(() => {
 
-    app.use(cors({
-        origin: "https://mean-frontend-g5w2db6nj-sachithsujeewa.vercel.app",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-    }));
+    app.use(cors()); // Allow requests from any site and for any methods
 
     app.use("/employees", employeeRouter);
     
